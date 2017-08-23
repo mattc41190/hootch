@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "bundle": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "hapi": "^16.5.2"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
   }
 }
