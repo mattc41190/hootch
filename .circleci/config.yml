@@ -2,19 +2,23 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+general:
+  branches:
+    only:
+      - circle-ci
+version:                2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image:          circleci/node:7.10
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      # - image:        circleci/mongo:3.4.4
 
-    working_directory: ~/hootch-site
+    working_directory:  ~/hootch-site
 
     steps:
       - checkout
@@ -26,21 +30,17 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install
+      - run:            npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key:          v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test
-general:
-  branches:
-    only:
-      - circle-ci
+      - run:            npm test
 deployment:
   staging:
-    branch: circle-ci
+    branch:             circle-ci
     heroku:
-      appname: hootchist
+      appname:          hootchist
