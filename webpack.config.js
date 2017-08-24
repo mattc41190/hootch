@@ -4,11 +4,12 @@ const path = require('path');
 
 module.exports = {
 	context: __dirname,
-	entry: './scripts/index.js',
+	entry: './src/index.js',
 	output: {
 		path: __dirname + '/public',
 		filename: 'bundle.js'
 	},
+	devtool: ['inline-source-map'],
 	module: {
 		loaders: [
 			{
