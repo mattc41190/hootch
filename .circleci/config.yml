@@ -39,3 +39,8 @@ general:
   branches:
     only:
       - circle-ci
+deployment:
+  staging:
+    branch: circle-ci
+    heroku:
+      appname: hootchist
