@@ -15,7 +15,8 @@ server.register(require('inert'), (err) => {
 		path: '/{param*}',
 		handler: {
 			directory: {
-				path: 'public'
+				path: 'public',
+				listing: true
 			}
 		}
 	});
