@@ -5,18 +5,17 @@
   "main": "index.js",
   "scripts": {
     "bundle": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^16.5.2"
+    "hapi": "^16.5.2",
+    "inert": "^4.2.1"
   },
   "devDependencies": {
-<<<<<<< f792574a7750346075e1aae12548889e4ca244ba
-    "webpack": "^3.5.5"
-=======
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -30,6 +29,5 @@
     "react-dom": "^0.14.6",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"
->>>>>>> Added babela and working React Component
   }
 }
