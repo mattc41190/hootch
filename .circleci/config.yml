@@ -35,3 +35,7 @@ jobs:
 
       # run tests!
       - run: npm test
+general:
+  branches:
+    only:
+      - circle-ci
