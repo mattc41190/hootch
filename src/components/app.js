@@ -1,13 +1,14 @@
 import React from 'react'
 import TodosList from './TodosList'
+import CreateTodo from './create-todo'
 
 const todos = [
     {
-        task: 'learn React',
+        task: 'Sierra Nevada',
         isCompleted: false
     },
     {
-        task: 'learn Redux',
+        task: 'Dogfish Head',
         isCompleted: false
     }
 ]
@@ -23,10 +24,22 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>Todo App</h1>
-                <TodosList todos={this.state.todos} />
+                <h1>To Drink App</h1>
+                <CreateTodo createTask={this.createTask.bind(this)} />
+                <TodosList
+                    todos={this.state.todos}
+                />
             </div>
         )
+    }
+
+    createTask(task) {
+        this.state.todos.push({
+            task,
+            isCompleted: false
+        })
+
+        this.setState({todos: this.state.todos})
     }
 }
 
