@@ -1,13 +1,16 @@
 import React from 'react'
-import _ from 'lodash'
 import TodosListHeader from './todos-list-header'
 import TodosListItem from './todos-list-item'
 
 class TodosList extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     renderItems() {
-        return _.map(this.props.todos, (todo, index) => {
+        return this.props.todos.map((todo, index) => {
             return (
-                <TodosListItem key={index} {...todo} />
+                <TodosListItem key={index} {...todo} toggleTask={this.props.toggleTask.bind(this)} />
             )
         })
     }
