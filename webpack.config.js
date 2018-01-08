@@ -3,15 +3,19 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+	watch: true,
+	cache: true,
+	devtool: '#cheap-module-eval-source-map',
 	context: __dirname,
-	entry: './src/index.js',
+	entry: {
+		app: './src/index.js'
+	},
 	output: {
 		path: __dirname + '/public',
 		filename: 'bundle.js'
 	},
-	devtool: ['inline-source-map'],
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
