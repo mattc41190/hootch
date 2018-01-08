@@ -1,28 +1,25 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class TodosListItem extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isEditing: false
-        }
+        };
+        this.task = this.props.task;
+        this.isCompleted = this.props.isCompleted;
+        this.toggleTask = this.props.toggleTask.bind(this, this.task);
+        this.onCancelClick = this.onCancelClick.bind(this);
+        this.onEditClick = this.onEditClick.bind(this);
     }
 
-    renderTaskSection() {
-        const { task, isCompleted } = this.props;
+    onEditClick() {
+        this.setState({ isEditing: true });
+    }
 
-        const taskStyle = {
-            color: isCompleted ? 'green' : 'red',
-            cursor: 'pointer'
-        }
-
-        return (
-                <td style={taskStyle}
-                    onClick={this.props.toggleTask.bind(this, task)}
-                >
-                    {task}
-                </td>
-        )
+    onCancelClick() {
+        this.setState({ isEditing: false });
     }
 
     renderActionsSection() {
@@ -30,24 +27,29 @@ class TodosListItem extends React.Component {
             return (
                 <td>
                     <button>Save</button>
-                    <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
+                    <button onClick={this.onCancelClick}>Cancel</button>
                 </td>
-            )
+            );
         }
         return (
             <td>
-                <button onClick={this.onEditClick.bind(this)}>Edit</button>
+                <button onClick={this.onEditClick}>Edit</button>
                 <button>Delete</button>
             </td>
-        )
+        );
     }
 
-    onEditClick() {
-        this.setState({isEditing: true})
-    }
+    renderTaskSection() {
+        const taskStyle = {
+            color: this.isCompleted ? 'green' : 'red',
+            cursor: 'pointer'
+        };
 
-    onCancelClick() {
-        this.setState({isEditing: false})
+        return (
+            <td style={taskStyle}>
+                <button onClick={this.toggleTask}>{this.task}</button>
+            </td>
+        );
     }
 
     render() {
@@ -56,8 +58,18 @@ class TodosListItem extends React.Component {
                 {this.renderTaskSection()}
                 {this.renderActionsSection()}
             </tr>
-        )
+        );
     }
 }
 
-export default TodosListItem
+TodosListItem.propTypes = {
+    task: PropTypes.string,
+    isCompleted: PropTypes.bool.isRequired,
+    toggleTask: PropTypes.func.isRequired
+};
+
+TodosListItem.defaultProps = {
+    task: ''
+};
+
+export default TodosListItem;

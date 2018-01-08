@@ -1,20 +1,35 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class CreateToDo extends React.Component {
-    render() {
-        return (
-            <form onSubmit={this.handleCreate.bind(this)}>
-                <input placeholder="What do I need to do?" ref="createInput"/>
-                <button>Create</button>
-            </form>
-        )
+    constructor() {
+        super();
+        this.handleCreate = this.handleCreate.bind(this);
+        this.inputValue = { value: '' };
+        this.placeholder = 'What do I need to do?';
     }
 
     handleCreate(event) {
-        event.preventDefault()
-        this.props.createTask(this.refs.createInput.value)
-        this.refs.createInput.value = ''
+        event.preventDefault();
+        this.props.createTask(this.inputValue.value);
+        this.inputValue.value = '';
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleCreate}>
+                <input
+                    placeholder={this.placeholder}
+                    ref={(input) => { this.inputValue = input; }}
+                />
+                <button>Create</button>
+            </form>
+        );
     }
 }
 
-export default CreateToDo
+CreateToDo.propTypes = {
+    createTask: PropTypes.func.isRequired
+};
+
+export default CreateToDo;

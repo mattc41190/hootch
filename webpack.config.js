@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
 	watch: true,
 	cache: true,
-	devtool: '#cheap-module-eval-source-map',
+	devtool: 'source-map',
 	context: __dirname,
 	entry: {
 		app: './src/index.js'
@@ -26,7 +26,12 @@ module.exports = {
 					],
 					plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
 				}
-			}
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'eslint-loader'
+		    }
 		]
 	},
 	plugins: debug

@@ -1,18 +1,19 @@
-import React from 'react'
-import TodosListHeader from './todos-list-header'
-import TodosListItem from './todos-list-item'
+import React from 'react';
+import PropTypes from 'prop-types';
+import TodosListHeader from './todos-list-header';
+import TodosListItem from './todos-list-item';
 
 class TodosList extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     renderItems() {
-        return this.props.todos.map((todo, index) => {
-            return (
-                <TodosListItem key={index} {...todo} toggleTask={this.props.toggleTask.bind(this)} />
-            )
-        })
+        return (
+            this.props.todos.map(todo => (
+                <TodosListItem
+                    key={todo.id}
+                    {...todo}
+                    toggleTask={this.props.toggleTask}
+                />
+            ))
+        );
     }
 
     render() {
@@ -23,8 +24,16 @@ class TodosList extends React.Component {
                     {this.renderItems()}
                 </tbody>
             </table>
-        )
+        );
     }
 }
 
-export default TodosList
+TodosList.propTypes = {
+    todos: PropTypes.arrayOf(PropTypes.shape({
+        task: PropTypes.string.isRequired,
+        isCompleted: PropTypes.bool.isRequired
+    })).isRequired,
+    toggleTask: PropTypes.func.isRequired
+};
+
+export default TodosList;
