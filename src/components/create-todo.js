@@ -17,12 +17,15 @@ class CreateToDo extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleCreate}>
-                <input
-                    placeholder={this.placeholder}
-                    ref={(input) => { this.inputValue = input; }}
-                />
-                <button>Create</button>
+            <form className="form-inline" onSubmit={this.handleCreate}>
+                <div className="form-group">
+                    <input
+                        className="form-control"
+                        placeholder={this.placeholder}
+                        ref={(input) => { this.inputValue = input; }}
+                    />
+                    <button type="submit" className="btn btn-default">Create</button>
+                </div>
             </form>
         );
     }

@@ -1,12 +1,10 @@
 import React from 'react';
 
 const TodosListHeader = () => (
-    <thead>
-        <tr>
-            <th>Task</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+    <div className="row">
+        <div className="col-xs-8">Task</div>
+        <div className="col-xs-4">Action</div>
+    </div>
 );
 
 export default TodosListHeader;

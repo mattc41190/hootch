@@ -18,12 +18,10 @@ class TodosList extends React.Component {
 
     render() {
         return (
-            <table>
-                <TodosListHeader />
-                <tbody>
-                    {this.renderItems()}
-                </tbody>
-            </table>
+            <div className="col-md-4">
+                {this.props.todos.length > 0 ? <TodosListHeader /> : null}
+                {this.renderItems()}
+            </div>
         );
     }
 }

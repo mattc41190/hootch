@@ -24,17 +24,17 @@ class TodosListItem extends React.Component {
     renderActionsSection() {
         if (this.state.isEditing) {
             return (
-                <td>
+                <div className="col-xs-4">
                     <button>Save</button>
                     <button onClick={this.onCancelClick}>Cancel</button>
-                </td>
+                </div>
             );
         }
         return (
-            <td>
+            <div className="col-xs-4">
                 <button onClick={this.onEditClick}>Edit</button>
                 <button>Delete</button>
-            </td>
+            </div>
         );
     }
 
@@ -45,20 +45,20 @@ class TodosListItem extends React.Component {
         };
 
         return (
-            <td style={taskStyle}>
+            <div className="col-xs-8" style={taskStyle}>
                 <div onClick={this.toggleTask} role="button" tabIndex="0">
                     {this.props.task}
                 </div>
-            </td>
+            </div>
         );
     }
 
     render() {
         return (
-            <tr>
+            <div className="row">
                 {this.renderTaskSection()}
                 {this.renderActionsSection()}
-            </tr>
+            </div>
         );
     }
 }
