@@ -3,24 +3,11 @@ import uuid from 'uuid/v1';
 import TodosList from './TodosList';
 import CreateTodo from './create-todo';
 
-const todos = [
-    {
-        id: 1,
-        task: 'Sierra Nevada',
-        isCompleted: false
-    },
-    {
-        id: 2,
-        task: 'Dogfish Head',
-        isCompleted: true
-    }
-];
-
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos
+            todos: []
         };
         this.createTask = this.createTask.bind(this);
         this.toggleTask = this.toggleTask.bind(this);

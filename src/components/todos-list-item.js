@@ -7,9 +7,8 @@ class TodosListItem extends React.Component {
         this.state = {
             isEditing: false
         };
-        this.task = this.props.task;
-        this.isCompleted = this.props.isCompleted;
-        this.toggleTask = this.props.toggleTask.bind(this, this.task);
+
+        this.toggleTask = this.props.toggleTask.bind(this, this.props.task);
         this.onCancelClick = this.onCancelClick.bind(this);
         this.onEditClick = this.onEditClick.bind(this);
     }
@@ -41,13 +40,15 @@ class TodosListItem extends React.Component {
 
     renderTaskSection() {
         const taskStyle = {
-            color: this.isCompleted ? 'green' : 'red',
+            color: this.props.isCompleted ? 'green' : 'red',
             cursor: 'pointer'
         };
 
         return (
             <td style={taskStyle}>
-                <button onClick={this.toggleTask}>{this.task}</button>
+                <div onClick={this.toggleTask} role="button" tabIndex="0">
+                    {this.props.task}
+                </div>
             </td>
         );
     }
