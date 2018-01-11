@@ -11,6 +11,9 @@ class TodosList extends React.Component {
                     key={todo.id}
                     {...todo}
                     toggleTask={this.props.toggleTask}
+                    editTask={this.props.editTask}
+                    cancelTask={this.props.cancelTask}
+                    deleteTask={this.props.deleteTask}
                 />
             ))
         );
@@ -29,9 +32,13 @@ class TodosList extends React.Component {
 TodosList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
         task: PropTypes.string.isRequired,
-        isCompleted: PropTypes.bool.isRequired
+        isCompleted: PropTypes.bool.isRequired,
+        isEditing: PropTypes.bool.isRequired
     })).isRequired,
-    toggleTask: PropTypes.func.isRequired
+    toggleTask: PropTypes.func.isRequired,
+    editTask: PropTypes.func.isRequired,
+    cancelTask: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired
 };
 
 export default TodosList;

@@ -11,10 +11,13 @@ class App extends React.Component {
         };
         this.createTask = this.createTask.bind(this);
         this.toggleTask = this.toggleTask.bind(this);
+        this.editTask = this.editTask.bind(this);
+        this.cancelTask = this.cancelTask.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
     }
 
-    toggleTask(task) {
-        const foundTodo = this.state.todos.find(todo => todo.task === task);
+    toggleTask(id) {
+        const foundTodo = this.state.todos.find(todo => todo.id === id);
         foundTodo.isCompleted = !foundTodo.isCompleted;
         this.setState({ todos: this.state.todos });
     }
@@ -23,10 +26,35 @@ class App extends React.Component {
         this.state.todos.push({
             id: uuid(),
             task,
-            isCompleted: false
+            isCompleted: false,
+            isEditing: false
         });
 
         this.setState({ todos: this.state.todos });
+    }
+
+    editTask(id) {
+        const foundTodo = this.state.todos.find(todo => todo.id === id);
+        if (foundTodo.isEditing === false) {
+            // Cancel previous task under edit
+            this.cancelTask();
+            // Edit current task
+            foundTodo.isEditing = true;
+            this.setState({ todos: this.state.todos });
+        }
+    }
+
+    cancelTask() {
+        const foundTodo = this.state.todos.find(todo => todo.isEditing === true);
+        if (foundTodo) {
+            foundTodo.isEditing = false;
+        }
+        this.setState({ todos: this.state.todos });
+    }
+
+    deleteTask(id) {
+        const filteredTodos = this.state.todos.filter(todo => todo.id !== id);
+        this.setState({ todos: filteredTodos });
     }
 
     render() {
@@ -34,7 +62,13 @@ class App extends React.Component {
             <div>
                 <h1>Sample App</h1>
                 <CreateTodo createTask={this.createTask} />
-                <TodosList todos={this.state.todos} toggleTask={this.toggleTask} />
+                <TodosList
+                    todos={this.state.todos}
+                    toggleTask={this.toggleTask}
+                    editTask={this.editTask}
+                    cancelTask={this.cancelTask}
+                    deleteTask={this.deleteTask}
+                />
             </div>
         );
     }

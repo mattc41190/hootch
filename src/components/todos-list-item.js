@@ -4,36 +4,25 @@ import PropTypes from 'prop-types';
 class TodosListItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isEditing: false
-        };
-
-        this.toggleTask = this.props.toggleTask.bind(this, this.props.task);
-        this.onCancelClick = this.onCancelClick.bind(this);
-        this.onEditClick = this.onEditClick.bind(this);
-    }
-
-    onEditClick() {
-        this.setState({ isEditing: true });
-    }
-
-    onCancelClick() {
-        this.setState({ isEditing: false });
+        this.toggleTask = this.props.toggleTask.bind(this, this.props.id);
+        this.editTask = this.props.editTask.bind(this, this.props.id);
+        this.cancelTask = this.props.cancelTask.bind(this);
+        this.deleteTask = this.props.deleteTask.bind(this, this.props.id);
     }
 
     renderActionsSection() {
-        if (this.state.isEditing) {
+        if (this.props.isEditing) {
             return (
                 <div className="col-xs-4">
                     <button>Save</button>
-                    <button onClick={this.onCancelClick}>Cancel</button>
+                    <button onClick={this.cancelTask}>Cancel</button>
                 </div>
             );
         }
         return (
             <div className="col-xs-4">
-                <button onClick={this.onEditClick}>Edit</button>
-                <button>Delete</button>
+                <button onClick={this.editTask}>Edit</button>
+                <button onClick={this.deleteTask}>Delete</button>
             </div>
         );
     }
@@ -64,9 +53,14 @@ class TodosListItem extends React.Component {
 }
 
 TodosListItem.propTypes = {
+    id: PropTypes.string.isRequired,
     task: PropTypes.string,
+    isEditing: PropTypes.bool.isRequired,
     isCompleted: PropTypes.bool.isRequired,
-    toggleTask: PropTypes.func.isRequired
+    toggleTask: PropTypes.func.isRequired,
+    editTask: PropTypes.func.isRequired,
+    cancelTask: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired
 };
 
 TodosListItem.defaultProps = {
