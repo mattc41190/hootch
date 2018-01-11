@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CreateToDo extends React.Component {
+    static propTypes = {
+        createTask: PropTypes.func.isRequired
+    };
+
     constructor() {
         super();
         this.handleCreate = this.handleCreate.bind(this);
@@ -11,8 +15,11 @@ class CreateToDo extends React.Component {
 
     handleCreate(event) {
         event.preventDefault();
-        this.props.createTask(this.inputValue.value);
-        this.inputValue.value = '';
+        const { value } = this.inputValue;
+        if (value.length > 0) {
+            this.props.createTask(this.inputValue.value);
+            this.inputValue.value = '';
+        }
     }
 
     render() {
@@ -30,9 +37,5 @@ class CreateToDo extends React.Component {
         );
     }
 }
-
-CreateToDo.propTypes = {
-    createTask: PropTypes.func.isRequired
-};
 
 export default CreateToDo;

@@ -2,6 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class TodosListItem extends React.Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        task: PropTypes.string,
+        isEditing: PropTypes.bool.isRequired,
+        isCompleted: PropTypes.bool.isRequired,
+        toggleTask: PropTypes.func.isRequired,
+        editTask: PropTypes.func.isRequired,
+        cancelTask: PropTypes.func.isRequired,
+        deleteTask: PropTypes.func.isRequired
+    };
+    static defaultProps = {
+        task: ''
+    };
+
     constructor(props) {
         super(props);
         this.toggleTask = this.props.toggleTask.bind(this, this.props.id);
@@ -51,20 +65,5 @@ class TodosListItem extends React.Component {
         );
     }
 }
-
-TodosListItem.propTypes = {
-    id: PropTypes.string.isRequired,
-    task: PropTypes.string,
-    isEditing: PropTypes.bool.isRequired,
-    isCompleted: PropTypes.bool.isRequired,
-    toggleTask: PropTypes.func.isRequired,
-    editTask: PropTypes.func.isRequired,
-    cancelTask: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired
-};
-
-TodosListItem.defaultProps = {
-    task: ''
-};
 
 export default TodosListItem;

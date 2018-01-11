@@ -9,20 +9,15 @@ class App extends React.Component {
         this.state = {
             todos: []
         };
-        this.createTask = this.createTask.bind(this);
-        this.toggleTask = this.toggleTask.bind(this);
-        this.editTask = this.editTask.bind(this);
-        this.cancelTask = this.cancelTask.bind(this);
-        this.deleteTask = this.deleteTask.bind(this);
     }
 
-    toggleTask(id) {
+    toggleTask = (id) => {
         const foundTodo = this.state.todos.find(todo => todo.id === id);
         foundTodo.isCompleted = !foundTodo.isCompleted;
         this.setState({ todos: this.state.todos });
     }
 
-    createTask(task) {
+    createTask = (task) => {
         this.state.todos.push({
             id: uuid(),
             task,
@@ -33,7 +28,7 @@ class App extends React.Component {
         this.setState({ todos: this.state.todos });
     }
 
-    editTask(id) {
+    editTask = (id) => {
         const foundTodo = this.state.todos.find(todo => todo.id === id);
         if (foundTodo.isEditing === false) {
             // Cancel previous task under edit
@@ -44,7 +39,7 @@ class App extends React.Component {
         }
     }
 
-    cancelTask() {
+    cancelTask = () => {
         const foundTodo = this.state.todos.find(todo => todo.isEditing === true);
         if (foundTodo) {
             foundTodo.isEditing = false;
@@ -52,7 +47,7 @@ class App extends React.Component {
         this.setState({ todos: this.state.todos });
     }
 
-    deleteTask(id) {
+    deleteTask = (id) => {
         const filteredTodos = this.state.todos.filter(todo => todo.id !== id);
         this.setState({ todos: filteredTodos });
     }

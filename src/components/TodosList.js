@@ -4,6 +4,18 @@ import TodosListHeader from './todos-list-header';
 import TodosListItem from './todos-list-item';
 
 class TodosList extends React.Component {
+    static propTypes = {
+        todos: PropTypes.arrayOf(PropTypes.shape({
+            task: PropTypes.string.isRequired,
+            isCompleted: PropTypes.bool.isRequired,
+            isEditing: PropTypes.bool.isRequired
+        })).isRequired,
+        toggleTask: PropTypes.func.isRequired,
+        editTask: PropTypes.func.isRequired,
+        cancelTask: PropTypes.func.isRequired,
+        deleteTask: PropTypes.func.isRequired
+    };
+
     renderItems() {
         return (
             this.props.todos.map(todo => (
@@ -28,17 +40,5 @@ class TodosList extends React.Component {
         );
     }
 }
-
-TodosList.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.shape({
-        task: PropTypes.string.isRequired,
-        isCompleted: PropTypes.bool.isRequired,
-        isEditing: PropTypes.bool.isRequired
-    })).isRequired,
-    toggleTask: PropTypes.func.isRequired,
-    editTask: PropTypes.func.isRequired,
-    cancelTask: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired
-};
 
 export default TodosList;
