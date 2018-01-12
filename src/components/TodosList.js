@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TodosListHeader from './todos-list-header';
 import TodosListItem from './todos-list-item';
 
 class TodosList extends React.Component {
@@ -19,14 +18,16 @@ class TodosList extends React.Component {
     renderItems() {
         return (
             this.props.todos.map(todo => (
-                <TodosListItem
-                    key={todo.id}
-                    {...todo}
-                    toggleTask={this.props.toggleTask}
-                    editTask={this.props.editTask}
-                    cancelTask={this.props.cancelTask}
-                    deleteTask={this.props.deleteTask}
-                />
+                <div className="row">
+                    <TodosListItem
+                        key={todo.id}
+                        {...todo}
+                        toggleTask={this.props.toggleTask}
+                        editTask={this.props.editTask}
+                        cancelTask={this.props.cancelTask}
+                        deleteTask={this.props.deleteTask}
+                    />
+                </div>
             ))
         );
     }
@@ -34,7 +35,6 @@ class TodosList extends React.Component {
     render() {
         return (
             <div className="col-md-4">
-                {this.props.todos.length > 0 ? <TodosListHeader /> : null}
                 {this.renderItems()}
             </div>
         );

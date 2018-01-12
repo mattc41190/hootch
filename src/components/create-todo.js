@@ -31,7 +31,7 @@ class CreateToDo extends React.Component {
                         placeholder={this.placeholder}
                         ref={(input) => { this.inputValue = input; }}
                     />
-                    <button type="submit" className="btn btn-default">Create</button>
+                    <button type="submit" className="btn btn-default"><span className="glyphicon glyphicon-plus" /></button>
                 </div>
             </form>
         );

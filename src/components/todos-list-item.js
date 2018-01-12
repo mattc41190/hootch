@@ -6,7 +6,7 @@ class TodosListItem extends React.Component {
         id: PropTypes.string.isRequired,
         task: PropTypes.string,
         isEditing: PropTypes.bool.isRequired,
-        isCompleted: PropTypes.bool.isRequired,
+        // isCompleted: PropTypes.bool.isRequired,
         toggleTask: PropTypes.func.isRequired,
         editTask: PropTypes.func.isRequired,
         cancelTask: PropTypes.func.isRequired,
@@ -24,33 +24,36 @@ class TodosListItem extends React.Component {
         this.deleteTask = this.props.deleteTask.bind(this, this.props.id);
     }
 
-    renderActionsSection() {
+    renderTodo() {
         if (this.props.isEditing) {
             return (
-                <div className="col-xs-4">
-                    <button>Save</button>
-                    <button onClick={this.cancelTask}>Cancel</button>
+                <div className="col-xs-12">
+                    <div className="input-group">
+                        <input type="text" className="form-control" placeholder="Todo task" value={this.props.task} />
+                        <span className="input-group-btn">
+                            <button className="btn btn-default" type="button">
+                                <span className="glyphicon glyphicon-floppy-disk" />
+                            </button>
+                            <button className="btn btn-default" onClick={this.cancelTask} type="button">
+                                <span className="glyphicon glyphicon-remove" />
+                            </button>
+                        </span>
+                    </div>
                 </div>
             );
         }
         return (
-            <div className="col-xs-4">
-                <button onClick={this.editTask}>Edit</button>
-                <button onClick={this.deleteTask}>Delete</button>
-            </div>
-        );
-    }
-
-    renderTaskSection() {
-        const taskStyle = {
-            color: this.props.isCompleted ? 'green' : 'red',
-            cursor: 'pointer'
-        };
-
-        return (
-            <div className="col-xs-8" style={taskStyle}>
-                <div onClick={this.toggleTask} role="button" tabIndex="0">
-                    {this.props.task}
+            <div className="col-xs-12">
+                <div className="input-group">
+                    <input type="text" className="form-control" placeholder="Todo task" value={this.props.task} readOnly />
+                    <span className="input-group-btn">
+                        <button className="btn btn-default" onClick={this.editTask} type="button">
+                            <span className="glyphicon glyphicon-pencil" />
+                        </button>
+                        <button className="btn btn-default" onClick={this.deleteTask} type="button">
+                            <span className="glyphicon glyphicon-trash" />
+                        </button>
+                    </span>
                 </div>
             </div>
         );
@@ -59,8 +62,7 @@ class TodosListItem extends React.Component {
     render() {
         return (
             <div className="row">
-                {this.renderTaskSection()}
-                {this.renderActionsSection()}
+                {this.renderTodo()}
             </div>
         );
     }
